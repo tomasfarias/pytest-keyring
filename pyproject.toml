@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "pytest-keyring"
+version = "1.0.0"
+description = "A Pytest plugin to access the system's keyring to provide credentials for tests"
+authors = ["Tomás Farías Santana <tomas@tomasfarias.dev>"]
+readme = "README.md"
+classifiers = [
+    "Framework :: Pytest",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+pytest = ">=7.1"
+keyring = ">=24.2"
+
+[tool.poetry.group.dev.dependencies]
+black = ">=23.9"
+ruff = ">=0.0.289"
+mypy = ">=1.5"
+secretstorage = ">=3.3"
+pre-commit = ">=3.4"
+tox = ">=4.11"
+
+[tool.poetry.plugins]
+pytest11 = { pytest_keyring = "pytest_keyring" }
+
+[tool.ruff]
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"src/*" = ["E501"]
+
+[tool.mypy]
+mypy_path = "src"
+namespace_packages = false
+show_error_codes = true
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core>=1",
+]
