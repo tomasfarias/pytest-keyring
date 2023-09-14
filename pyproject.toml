@@ -5,7 +5,14 @@ description = "A Pytest plugin to access the system's keyring to provide credent
 authors = ["Tomás Farías Santana <tomas@tomasfarias.dev>"]
 readme = "README.md"
 classifiers = [
-    "Framework :: Pytest",
+  "Framework :: Pytest",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
 ]
 
 [tool.poetry.dependencies]
