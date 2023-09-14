@@ -55,12 +55,15 @@ def test_configure_backend(pytester):
         """
         def test_get_password(password_database_username):
             assert password_database_username is None
+
+        def test_get_credential(credential_database_username):
+            assert credential_database_username is None
         """
     )
 
     result = pytester.runpytest("--keyring-backend=keyring.backends.null.Keyring")
 
-    result.assert_outcomes(passed=1)
+    result.assert_outcomes(passed=2)
 
 
 def test_configure_password_prefix(pytester):
