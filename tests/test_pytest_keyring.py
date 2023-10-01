@@ -6,19 +6,19 @@ def test_tmp_keyring(pytester):
     pytester.makepyfile(
         """
         def test_tmp_keyring(tmp_keyring):
-            tmp_keyring.set_password("service", "username", "pass")
+            tmp_keyring.set_password("aservice", "ausername", "pass")
 
-            assert tmp_keyring.get_password("service", "username") == "pass"
+            assert tmp_keyring.get_password("aservice", "ausername") == "pass"
 
         def test_tmp_keyring_is_gone(tmp_keyring):
-            assert tmp_keyring.get_password("service", "username") is None
+            assert tmp_keyring.get_password("aservice", "ausername") is None
         """
     )
 
-    result = pytester.runpytest()
+    result = pytester.runpytest("-vv")
 
     result.assert_outcomes(passed=2)
-    assert keyring.get_password("service", "username") is None
+    assert keyring.get_password("aservice", "ausername") is None
 
 
 def test_get_credential(pytester):
