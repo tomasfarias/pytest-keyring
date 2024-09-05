@@ -3,10 +3,6 @@ import typing
 
 import keyring
 import pytest
-from _pytest import nodes
-from _pytest.config import Config
-from _pytest.config.argparsing import Parser
-from _pytest.fixtures import FixtureDef
 
 
 class KeyringProtocol(typing.Protocol):
@@ -25,7 +21,7 @@ class KeyringProtocol(typing.Protocol):
         ...
 
 
-def pytest_addoption(parser: Parser) -> None:
+def pytest_addoption(parser: pytest.Parser) -> None:
     group = parser.getgroup("keyring", "pytest-keyring")
     group.addoption(
         "--keyring-credential-prefix",
@@ -100,7 +96,7 @@ def tmp_keyring() -> typing.Iterator[TemporaryKeyringBackend]:
         yield tmp_backend
 
 
-def pytest_configure(config: Config) -> None:
+def pytest_configure(config: pytest.Config) -> None:
     backend = config.getoption("keyring_backend")
 
     if isinstance(backend, str):
@@ -108,7 +104,9 @@ def pytest_configure(config: Config) -> None:
         keyring.set_keyring(backend_cls)
 
 
-def pytest_collection_modifyitems(config: Config, items: list[nodes.Item]) -> None:
+def pytest_collection_modifyitems(
+    session: pytest.Session, config: pytest.Config, items: list[pytest.Item]
+) -> None:
     credential_prefix = config.getoption("keyring_credential_prefix")
     password_prefix = config.getoption("keyring_password_prefix")
 
@@ -127,11 +125,11 @@ def pytest_collection_modifyitems(config: Config, items: list[nodes.Item]) -> No
                     return credential
 
                 item.session._fixturemanager._arg2fixturedefs[fixture_name] = [
-                    FixtureDef(
+                    pytest.FixtureDef(
                         argname=fixture_name,
                         func=fixture_credential_func,
                         scope="session",
-                        fixturemanager=item.session._fixturemanager,
+                        config=session.config,
                         baseid=None,
                         params=None,
                     ),
@@ -146,11 +144,11 @@ def pytest_collection_modifyitems(config: Config, items: list[nodes.Item]) -> No
                     return password
 
                 item.session._fixturemanager._arg2fixturedefs[fixture_name] = [
-                    FixtureDef(
+                    pytest.FixtureDef(
                         argname=fixture_name,
                         func=fixture_password_func,
+                        config=session.config,
                         scope="session",
-                        fixturemanager=item.session._fixturemanager,
                         baseid=None,
                         params=None,
                     ),
