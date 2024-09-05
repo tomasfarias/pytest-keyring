@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.11
+  python: python3.12
 
 repos:
 
@@ -41,8 +41,7 @@ repos:
     - keyring>=24.2
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  # Ruff version.
-  rev: v0.0.289
+  rev: v0.6.3
   hooks:
   - id: ruff
     args: [--exit-non-zero-on-fix]

@@ -20,7 +20,7 @@ keywords = ["keyring", "pytest", "pytest-plugin"]
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-pytest = ">=7.1"
+pytest = ">=8.0.2"
 keyring = ">=24.2"
 
 [tool.poetry.group.dev.dependencies]
