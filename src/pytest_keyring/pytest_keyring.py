@@ -143,7 +143,7 @@ def pytest_collection_modifyitems(
             elif fixture_name.startswith(password_prefix):
                 if len(fixture_name.split("_", maxsplit=2)) == 2:
                     _, service_name = fixture_name.split("_", maxsplit=1)
-                    username = None
+                    username = keyring.get_credential(service_name, None).username
                 else:
                     _, service_name, username = fixture_name.split("_", maxsplit=2)
 
