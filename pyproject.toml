@@ -6,7 +6,7 @@ requires = [
 
 [tool.poetry]
 name = "pytest-keyring"
-version = "1.0.4"
+version = "1.1.0"
 description = "A Pytest plugin to access the system's keyring to provide credentials for tests"
 authors = [ "Tomás Farías Santana <tomas@tomasfarias.dev>" ]
 readme = "README.md"
