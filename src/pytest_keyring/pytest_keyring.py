@@ -117,7 +117,12 @@ def pytest_collection_modifyitems(
                 continue
 
             if fixture_name.startswith(credential_prefix):
-                _, service_name, username = fixture_name.split("_", maxsplit=2)
+                if len(fixture_name.split("_", maxsplit=2)) == 2:
+                    _, service_name = fixture_name.split("_", maxsplit=1)
+                    username = None
+                else:
+                    _, service_name, username = fixture_name.split("_", maxsplit=2)
+
                 credential = keyring.get_credential(service_name, username)
 
                 def fixture_credential_func() -> keyring.credentials.Credential | None:
@@ -136,7 +141,12 @@ def pytest_collection_modifyitems(
                 ]
 
             elif fixture_name.startswith(password_prefix):
-                _, service_name, username = fixture_name.split("_", maxsplit=2)
+                if len(fixture_name.split("_", maxsplit=2)) == 2:
+                    _, service_name = fixture_name.split("_", maxsplit=1)
+                    username = keyring.get_credential(service_name, None).username
+                else:
+                    _, service_name, username = fixture_name.split("_", maxsplit=2)
+
                 password = keyring.get_password(service_name, username)
 
                 def fixture_password_func() -> str | None:
