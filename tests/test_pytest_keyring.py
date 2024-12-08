@@ -35,12 +35,40 @@ def test_get_credential(pytester):
     result.assert_outcomes(passed=1)
 
 
+def test_get_credential_without_username(pytester):
+    """Test get_credential."""
+    pytester.makepyfile(
+        """
+        def test_get_credential(credential_database):
+            assert credential_database.password == "pass"
+        """
+    )
+
+    result = pytester.runpytest()
+
+    result.assert_outcomes(passed=1)
+
+
 def test_get_password(pytester):
     """Test get_password."""
     pytester.makepyfile(
         """
         def test_get_password(password_database_username):
             assert password_database_username == "pass"
+        """
+    )
+
+    result = pytester.runpytest()
+
+    result.assert_outcomes(passed=1)
+
+
+def test_get_password_without_username(pytester):
+    """Test get_password."""
+    pytester.makepyfile(
+        """
+        def test_get_password(password_database):
+            assert password_database == "pass"
         """
     )
 
