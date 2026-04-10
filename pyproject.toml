@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "pytest-keyring"
-version = "1.1.0"
+version = "1.1.1"
 description = "A Pytest plugin to access the system's keyring to provide credentials for tests"
 readme = "README.md"
 keywords = [ "keyring", "pytest", "pytest-plugin" ]
