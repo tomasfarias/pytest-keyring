@@ -6,19 +6,15 @@ import pytest
 
 
 class KeyringProtocol(typing.Protocol):
-    def set_password(self, service_name: str, username: str, password: str) -> None:
-        ...
+    def set_password(self, service_name: str, username: str, password: str) -> None: ...
 
-    def delete_password(self, service_name: str, username: str) -> None:
-        ...
+    def delete_password(self, service_name: str, username: str) -> None: ...
 
-    def get_password(self, service_name: str, username: str) -> str | None:
-        ...
+    def get_password(self, service_name: str, username: str) -> str | None: ...
 
     def get_credential(
         self, service_name: str, username: typing.Optional[str]
-    ) -> keyring.credentials.Credential | None:
-        ...
+    ) -> keyring.credentials.Credential | None: ...
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -143,7 +139,10 @@ def pytest_collection_modifyitems(
             elif fixture_name.startswith(password_prefix):
                 if len(fixture_name.split("_", maxsplit=2)) == 2:
                     _, service_name = fixture_name.split("_", maxsplit=1)
-                    username = keyring.get_credential(service_name, None).username
+                    credential = keyring.get_credential(service_name, None)
+                    if credential is None:
+                        continue
+                    username = credential.username
                 else:
                     _, service_name, username = fixture_name.split("_", maxsplit=2)
 
