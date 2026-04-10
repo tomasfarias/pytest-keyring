@@ -10,11 +10,13 @@ class KeyringProtocol(typing.Protocol):
 
     def delete_password(self, service_name: str, username: str) -> None: ...
 
-    def get_password(self, service_name: str, username: str) -> str | None: ...
+    def get_password(
+        self, service_name: str, username: str
+    ) -> typing.Optional[str]: ...
 
     def get_credential(
         self, service_name: str, username: typing.Optional[str]
-    ) -> keyring.credentials.Credential | None: ...
+    ) -> typing.Optional[keyring.credentials.Credential]: ...
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -121,7 +123,9 @@ def pytest_collection_modifyitems(
 
                 credential = keyring.get_credential(service_name, username)
 
-                def fixture_credential_func() -> keyring.credentials.Credential | None:
+                def fixture_credential_func() -> typing.Optional[
+                    keyring.credentials.Credential
+                ]:
                     """Define a function for the dynamic fixture."""
                     return credential
 
@@ -148,7 +152,7 @@ def pytest_collection_modifyitems(
 
                 password = keyring.get_password(service_name, username)
 
-                def fixture_password_func() -> str | None:
+                def fixture_password_func() -> typing.Optional[str]:
                     """Define a function for the dynamic fixture."""
                     return password
 
