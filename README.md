@@ -4,7 +4,7 @@ Pytest plugin to access any configured keyring using the [`keyring`](https://pyp
 
 ## Motivation
 
-Frequently, tests require access to services, like databases, REST APIs, or blob storages. These services are sometimes hard or impossibel to mock or reproduce in a test environment. In particular, functional or end-to-end tests will be inclined to interact with real instances of these services. Accessing these services can require credentials, and using the keyring can be an alternative to populating CI environment variables with credentials.
+Frequently, tests require access to services, like databases, REST APIs, or blob storages. These services are sometimes hard or impossible to mock or reproduce in a test environment. In particular, functional or end-to-end tests will be inclined to interact with real instances of these services. Accessing these services can require credentials, and using the keyring can be an alternative to populating CI environment variables with credentials.
 
 ## Installation
 
