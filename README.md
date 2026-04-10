@@ -14,7 +14,7 @@ Install with:
 python -m pip install pytest-keyring
 ```
 
-Python versions 3.8 to 3.12 are supported.
+Any python version newer than 3.8 is supported.
 
 ## Usage
 
