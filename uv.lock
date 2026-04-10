@@ -8,7 +8,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-03-27T12:24:18.332252899Z"
+exclude-newer = "2026-03-27T12:32:49.059611953Z"
 exclude-newer-span = "P14D"
 
 [[package]]
@@ -1373,7 +1373,7 @@ wheels = [
 
 [[package]]
 name = "pytest-keyring"
-version = "1.1.1"
+version = "1.1.3"
 source = { editable = "." }
 dependencies = [
     { name = "keyring", version = "25.5.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
