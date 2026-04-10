@@ -1,5 +1,9 @@
 # pytest-keyring
 
+[![PyPI](https://img.shields.io/pypi/v/pytest-keyring?style=flat-square)](https://pypi.org/project/pytest-keyring)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-keyring?style=flat-square)](https://pypi.org/project/pytest-keyring)
+[![PyPI - License](https://img.shields.io/pypi/l/pytest-keyring?style=flat-square)](https://opensource.org/licenses/MIT)
+
 Pytest plugin to access any configured keyring using the [`keyring`](https://pypi.org/project/keyring/) package.
 
 ## Motivation
